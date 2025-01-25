@@ -41,7 +41,7 @@ export class ProductsEffects {
       ofType(ProductsPageActions.updateProduct),
       concatMap(({product}) =>
         this.productsService.update(product).pipe(
-          map(() => ProductActions.productUpdatedSuccess({ product })),
+          map(() => ProductActions.productUpdatedSuccess({ update: { id: product.id, changes: product } })),
           catchError((error) => of(ProductActions.productUpdatedFail({ message: error })))
         )
       )
